@@ -13,10 +13,14 @@ class PagoSeguro extends PaymentModule
      */
     public function __construct()
     {
-        $this->name    = 'pagoseguro';
-        $this->author  = 'Widres8';
-        $this->version = '1.0.0';
-        $this->tab     = 'payments_gateways';
+        $this->name                   = 'pagoseguro';
+        $this->tab                    = 'payments_gateways';
+        $this->version                = '1.0.0';
+        $this->ps_versions_compliancy = ['min' => '1.7', 'max' => _PS_VERSION_];
+        $this->author                 = 'Widres8';
+
+        $this->controllers            = ['validation'];
+        $this->is_eu_compatible       = 1;
 
         $this->currencies      = true;
         $this->currencies_mode = 'checkbox';
@@ -27,7 +31,6 @@ class PagoSeguro extends PaymentModule
 
         $this->displayName            = $this->l('PagoSeguro');
         $this->description            = $this->l('PagoSeguroDescription');
-        $this->ps_versions_compliancy = ['min' => '1.7.0.0', 'max' => '1.7.99.99'];
 
         if (!count(Currency::checkPaymentCurrencies($this->id))) {
             $this->warning = $this->l('NotSetCurrency');
@@ -67,32 +70,6 @@ class PagoSeguro extends PaymentModule
     }
 
     /**
-     * Get content to configurer module
-     */
-    public function getContent()
-    {
-        $output = null;
-
-        if (Tools::isSubmit('submit'.$this->name)) {
-            if (
-                !Configuration::updateValue('PAGOSEGURO_ACCOUNT_ID', (string) Tools::getValue('PAGOSEGURO_ACCOUNT_ID')) ||
-                !Configuration::updateValue('PAGOSEGURO_API_KEY', (string) Tools::getValue('PAGOSEGURO_API_KEY'))
-            ) {
-                $errors[] = $this->l('NotSaveConfiguration');
-            }
-            if (!empty($errors)) {
-                foreach ($errors as $error) {
-                    $output .= $this->displayError($error);
-                }
-            } else {
-                $output .= $this->displayConfirmation($this->l('SettingsUpdated'));
-            }
-        }
-
-        return  $output.$this->display(__FILE__, 'views/templates/admin/configure.tpl');
-    }
-
-    /**
      * Show module in payment select option how radio button
      * @param mixed $params
      */
@@ -124,8 +101,8 @@ class PagoSeguro extends PaymentModule
     public function hookdisplayHeader($params)
     {
         if ('order' === $this->context->controller->php_self) {
-            $this->context->controller->addCSS([$this->_path.'views/css/pagoseguro.css']);
-            $this->context->controller->addJS([$this->_path.'views/js/pagoseguro.js']);
+            $this->context->controller->registerStylesheet('modules-pagoseguro', 'modules/'.$this->name.'/css/payu.css', ['media' => 'all', 'priority' => 200]);
+            $this->context->controller->registerJavascript('modules-pagoseguro', 'modules/'.$this->name.'/js/payu.js', ['position' => 'bottom', 'priority' => 200]);
         }
     }
 
@@ -155,11 +132,41 @@ class PagoSeguro extends PaymentModule
     {
         $externalOption = new PaymentOption();
         $externalOption->setCallToActionText($this->l(''))
-                       // ->setAction($this->context->link->getModuleLink($this->name, 'validation', [], true))
+                       ->setAction($this->context->link->getModuleLink($this->name, 'validation', [], true))
                        ->setAdditionalInformation($this->context->smarty->fetch('module:pagoseguro/views/templates/hook/hook_payment_detail.tpl'))
-                       ->setLogo(Media::getMediaPath(_PS_MODULE_DIR_.$this->name.'views/img/payment_logo.png'));
+                       ->setLogo(Media::getMediaPath(_PS_MODULE_DIR_.$this->name.'/img/payment_logo.png'));
 
         return $externalOption;
+    }
+
+    /**
+     * Get content to configurer module
+     */
+    public function getContent()
+    {
+        $output = null;
+
+        if (Tools::isSubmit('submit'.$this->name)) {
+            $accountId = Tools::getValue('PAGOSEGURO_ACCOUNT_ID');
+            $apiKey    = Tools::getValue('PAGOSEGURO_API_KEY');
+
+            if ('' == $accountId || '' == $apiKey) {
+                $errors[] = $this->l('NotSaveConfiguration');
+                foreach ($errors as $error) {
+                    $output .= $this->displayError($error);
+                }
+            } else {
+                Configuration::updateValue('PAGOSEGURO_ACCOUNT_ID', $accountId);
+                Configuration::updateValue('PAGOSEGURO_API_KEY', $apiKey);
+                $output .= $this->displayConfirmation($this->l('SettingsUpdated'));
+                $this->context->smarty->assign([
+                    'PAGOSEGURO_ACCOUNT_ID' => Configuration::get('PAGOSEGURO_ACCOUNT_ID'),
+                    'PAGOSEGURO_API_KEY'    => Configuration::get('PAGOSEGURO_API_KEY'),
+                ]);
+            }
+        }
+
+        return $output.$this->display(__FILE__, 'views/templates/admin/configure.tpl');
     }
 
     /**
