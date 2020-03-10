@@ -11,6 +11,6 @@
             <dt>{l s='Amount' mod='pagoseguro'}</dt>
             <dd>{$totalAmount}</dd>
         </dl>
-        {l s='PaymentDetailsMessage' mod='pagoseguro'} 
+        {l s='PaymentDetailsMessage' mod='pagoseguro'}
     </div>
 </section>

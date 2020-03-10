@@ -83,7 +83,7 @@ class PagoSeguro extends PaymentModule
             return;
         }
 
-        $this->smarty->assign(
+        $this->context->smarty->assign(
             $this->getTemplateVars()
         );
 
@@ -132,7 +132,7 @@ class PagoSeguro extends PaymentModule
     {
         $externalOption = new PaymentOption();
         $externalOption->setCallToActionText($this->l(''))
-                       ->setAction($this->context->link->getModuleLink($this->name, 'validation', [], true))
+                       // ->setAction($this->context->link->getModuleLink($this->name, 'validation', [], true))
                        ->setAdditionalInformation($this->context->smarty->fetch('module:pagoseguro/views/templates/hook/hook_payment_detail.tpl'))
                        ->setLogo(Media::getMediaPath(_PS_MODULE_DIR_.$this->name.'/img/payment_logo.png'));
 
