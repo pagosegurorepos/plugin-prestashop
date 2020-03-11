@@ -31,7 +31,7 @@ class PagoSeguro extends PaymentModule
 
         $this->displayName            = $this->l('PagoSeguro');
         $this->description            = $this->l('PagoSeguroDescription');
-
+        $this->confirmUninstall       = $this->l('UninstallMessage');
         if (!count(Currency::checkPaymentCurrencies($this->id))) {
             $this->warning = $this->l('NotSetCurrency');
         }
@@ -46,7 +46,8 @@ class PagoSeguro extends PaymentModule
             !parent::install() ||
             !$this->registerHook('paymentOptions') ||
             !$this->registerHook('paymentReturn') ||
-            !$this->registerHook('displayHeader')
+            !$this->registerHook('displayHeader') ||
+            !Configuration::updateValue('PAGOSEGURO_URL_PAYMENT', 'http://18.216.0.72:3000/pagosegurocanal/public/checkoutpay/1652513760')
         ) {
             return false;
         }
@@ -60,6 +61,7 @@ class PagoSeguro extends PaymentModule
     public function uninstall()
     {
         if (!parent::uninstall() ||
+            !Configuration::deleteByName('PAGOSEGURO_URL_PAYMENT') ||
             !Configuration::deleteByName('PAGOSEGURO_ACCOUNT_ID') ||
             !Configuration::deleteByName('PAGOSEGURO_API_KEY')
         ) {
@@ -92,6 +94,35 @@ class PagoSeguro extends PaymentModule
         ];
 
         return $payment_options;
+    }
+
+    public function hookPaymentReturn($params)
+    {
+        if (!$this->active) {
+            return;
+        }
+
+        // $state = $params['order']->getCurrentState();
+        // if (in_array($state, array(Configuration::get('PS_OS_CHEQUE'), Configuration::get('PS_OS_OUTOFSTOCK'), Configuration::get('PS_OS_OUTOFSTOCK_UNPAID')))) {
+        //     $this->smarty->assign(array(
+        //         'total_to_pay' => Tools::displayPrice(
+        //             $params['order']->getOrdersTotalPaid(),
+        //             new Currency($params['order']->id_currency),
+        //             false
+        //         ),
+        //         'shop_name' => $this->context->shop->name,
+        //         'checkName' => $this->checkName,
+        //         'checkAddress' => Tools::nl2br($this->address),
+        //         'status' => 'ok',
+        //         'id_order' => $params['order']->id
+        //     ));
+        //     if (isset($params['order']->reference) && !empty($params['order']->reference)) {
+        //         $this->smarty->assign('reference', $params['order']->reference);
+        //     }
+        // } else {
+        //     $this->smarty->assign('status', 'failed');
+        // }
+        // return $this->fetch('module:ps_checkpayment/views/templates/hook/payment_return.tpl');
     }
 
     /**
@@ -131,10 +162,11 @@ class PagoSeguro extends PaymentModule
     public function getExternalPaymentOption()
     {
         $externalOption = new PaymentOption();
-        $externalOption->setCallToActionText($this->l(''))
-                       // ->setAction($this->context->link->getModuleLink($this->name, 'validation', [], true))
-                       ->setAdditionalInformation($this->context->smarty->fetch('module:pagoseguro/views/templates/hook/hook_payment_detail.tpl'))
-                       ->setLogo(Media::getMediaPath(_PS_MODULE_DIR_.$this->name.'/img/payment_logo.png'));
+        $externalOption->setModuleName($this->name)
+                    ->setCallToActionText($this->l(''))
+                    ->setAction($this->context->link->getModuleLink($this->name, 'payment', [], true))
+                    ->setAdditionalInformation($this->context->smarty->fetch('module:pagoseguro/views/templates/hook/hook_payment_detail.tpl'))
+                    ->setLogo(Media::getMediaPath(_PS_MODULE_DIR_.$this->name.'/img/payment_logo.png'));
 
         return $externalOption;
     }
@@ -159,12 +191,12 @@ class PagoSeguro extends PaymentModule
                 Configuration::updateValue('PAGOSEGURO_ACCOUNT_ID', $accountId);
                 Configuration::updateValue('PAGOSEGURO_API_KEY', $apiKey);
                 $output .= $this->displayConfirmation($this->l('SettingsUpdated'));
-                $this->context->smarty->assign([
-                    'PAGOSEGURO_ACCOUNT_ID' => Configuration::get('PAGOSEGURO_ACCOUNT_ID'),
-                    'PAGOSEGURO_API_KEY'    => Configuration::get('PAGOSEGURO_API_KEY'),
-                ]);
             }
         }
+        $this->context->smarty->assign([
+            'PAGOSEGURO_ACCOUNT_ID' => Configuration::get('PAGOSEGURO_ACCOUNT_ID'),
+            'PAGOSEGURO_API_KEY'    => Configuration::get('PAGOSEGURO_API_KEY'),
+        ]);
 
         return $output.$this->display(__FILE__, 'views/templates/admin/configure.tpl');
     }
