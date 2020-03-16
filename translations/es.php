@@ -12,6 +12,9 @@ $_MODULE['<{pagoseguro}prestashop>payment_8b394b039e518edfd9d13aca669337ad']    
 $_MODULE['<{pagoseguro}prestashop>configure_254f642527b45bc260048e30704edb39']           = 'Configuración';
 $_MODULE['<{pagoseguro}prestashop>configure_c6da12ebfc91e973b0ca0e483b1c0527']           = 'Account ID';
 $_MODULE['<{pagoseguro}prestashop>configure_b7c1026a3a781a5008ed454f8fcf6eb4']           = 'Api Key';
+$_MODULE['<{pagoseguro}prestashop>configure_a0b70d22bf13110a4924bc12c373dc5b']           = 'Modo Pruebas';
+$_MODULE['<{pagoseguro}prestashop>configure_288612f29f1b9b4f62d709328f6d9f78']           = 'Url de Pruebas';
+$_MODULE['<{pagoseguro}prestashop>configure_5d11b47fca71a83ba659a55d6ad68463']           = 'Url de Pago';
 $_MODULE['<{pagoseguro}prestashop>configure_c9cc8cce247e49bae79f15173ce97354']           = 'Guardar';
 $_MODULE['<{pagoseguro}prestashop>hook_payment_detail_b2f40690858b404ed10e62bdf422c704'] = 'Total';
 $_MODULE['<{pagoseguro}prestashop>hook_payment_detail_54c4646cf19cbc216839edfcfd58982c'] = 'Una vez que confirme su pedido, puede pagar utilizando el método de pago que elija de Pago Seguro.';

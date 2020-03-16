@@ -76,7 +76,7 @@ class PagoSeguroPaymentModuleFrontController extends ModuleFrontController
             $customer->secure_key);
 
         // Parameters Pago Seguro
-        $url                    = Configuration::get('PAGOSEGURO_URL_PAYMENT');
+        $url                    = 1 == Configuration::get('PAGOSEGURO_TEST_MODE') ? Configuration::get('PAGOSEGURO_URL_TEST') : Configuration::get('PAGOSEGURO_URL_PAYMENT');
         $accountId              = Configuration::get('PAGOSEGURO_ACCOUNT_ID');
         $apiKey                 = Configuration::get('PAGOSEGURO_API_KEY');
 

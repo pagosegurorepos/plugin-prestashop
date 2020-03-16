@@ -18,6 +18,43 @@
                     <input type="password" class="form-control" name="PAGOSEGURO_API_KEY" id="PAGOSEGURO_API_KEY" value="{$PAGOSEGURO_API_KEY}">
                 </div>
             </div>
+            <div class="form-group">
+                <label class="control-label col-lg-3">{l s='PAGOSEGURO_TEST_MODE' mod='pagoseguro'}</label>
+                <div class="col-lg-9">
+                <span class="switch prestashop-switch fixed-width-lg">
+                {if $PAGOSEGURO_TEST_MODE == '1'}
+                    <input type="radio" name="PAGOSEGURO_TEST_MODE" id="PAGOSEGURO_TEST_MODE_on" value="1" checked="checked">
+                    <label for="PAGOSEGURO_TEST_MODE_on">Sí</label>
+                    <input type="radio" name="PAGOSEGURO_TEST_MODE" id="PAGOSEGURO_TEST_MODE_off" value="0">
+                    <label for="PAGOSEGURO_TEST_MODE_off">No</label>
+                {/if}
+                {if $PAGOSEGURO_TEST_MODE == '0'}
+                    <input type="radio" name="PAGOSEGURO_TEST_MODE" id="PAGOSEGURO_TEST_MODE_on" value="1">
+                    <label for="PAGOSEGURO_TEST_MODE_on">Sí</label>
+                    <input type="radio" name="PAGOSEGURO_TEST_MODE" id="PAGOSEGURO_TEST_MODE_off" value="0" checked="checked">
+                    <label for="PAGOSEGURO_TEST_MODE_off">No</label>
+                {/if}
+                <a class="slide-button btn"></a>
+                </span>
+                                                                                
+                <p class="help-block">
+                    Debe estar desactivado si en la configuración de PayU esta en modo prueba
+                </p>
+                                                    
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-3" for="PAGOSEGURO_URL_TEST">{l s='PAGOSEGURO_URL_TEST' mod='pagoseguro'}</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" name="PAGOSEGURO_URL_TEST" id="PAGOSEGURO_URL_TEST" value="{$PAGOSEGURO_URL_TEST}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-3" for="PAGOSEGURO_URL_PAYMENT">{l s='PAGOSEGURO_URL_PAYMENT' mod='pagoseguro'}</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" name="PAGOSEGURO_URL_PAYMENT" id="PAGOSEGURO_URL_PAYMENT" value="{$PAGOSEGURO_URL_PAYMENT}">
+                </div>
+            </div>
         </div>
         <div class="panel-footer">
             <button type="submit" value="1" id="configuration_form_submit_btn" name="submitpagoseguro" class="btn pull-right" style="background-color: #FF0000; color: white;">

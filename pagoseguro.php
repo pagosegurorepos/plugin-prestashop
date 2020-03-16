@@ -46,8 +46,7 @@ class PagoSeguro extends PaymentModule
             !parent::install() ||
             !$this->registerHook('paymentOptions') ||
             !$this->registerHook('paymentReturn') ||
-            !$this->registerHook('displayHeader') ||
-            !Configuration::updateValue('PAGOSEGURO_URL_PAYMENT', 'http://18.216.0.72:3000/pagosegurocanal/public/checkoutpay/1652513760')
+            !$this->registerHook('displayHeader')
         ) {
             return false;
         }
@@ -61,9 +60,11 @@ class PagoSeguro extends PaymentModule
     public function uninstall()
     {
         if (!parent::uninstall() ||
-            !Configuration::deleteByName('PAGOSEGURO_URL_PAYMENT') ||
             !Configuration::deleteByName('PAGOSEGURO_ACCOUNT_ID') ||
-            !Configuration::deleteByName('PAGOSEGURO_API_KEY')
+            !Configuration::deleteByName('PAGOSEGURO_API_KEY') ||
+            !Configuration::deleteByName('PAGOSEGURO_TEST_MODE') ||
+            !Configuration::deleteByName('PAGOSEGURO_URL_TEST') ||
+            !Configuration::deleteByName('PAGOSEGURO_URL_PAYMENT')
         ) {
             return false;
         }
@@ -179,10 +180,13 @@ class PagoSeguro extends PaymentModule
         $output = null;
 
         if (Tools::isSubmit('submit'.$this->name)) {
-            $accountId = Tools::getValue('PAGOSEGURO_ACCOUNT_ID');
-            $apiKey    = Tools::getValue('PAGOSEGURO_API_KEY');
+            $accountId     = Tools::getValue('PAGOSEGURO_ACCOUNT_ID');
+            $apiKey        = Tools::getValue('PAGOSEGURO_API_KEY');
+            $testMode      = 1 == Tools::getValue('PAGOSEGURO_TEST_MODE') ? true : false;
+            $urlApiTest    = Tools::getValue('PAGOSEGURO_URL_TEST');
+            $urlApi        = Tools::getValue('PAGOSEGURO_URL_PAYMENT');
 
-            if ('' == $accountId || '' == $apiKey) {
+            if ('' == $accountId || '' == $apiKey || '' == $urlApi || '' == $urlApiTest) {
                 $errors[] = $this->l('NotSaveConfiguration');
                 foreach ($errors as $error) {
                     $output .= $this->displayError($error);
@@ -190,12 +194,18 @@ class PagoSeguro extends PaymentModule
             } else {
                 Configuration::updateValue('PAGOSEGURO_ACCOUNT_ID', $accountId);
                 Configuration::updateValue('PAGOSEGURO_API_KEY', $apiKey);
+                Configuration::updateValue('PAGOSEGURO_TEST_MODE', $testMode);
+                Configuration::updateValue('PAGOSEGURO_URL_TEST', $urlApiTest);
+                Configuration::updateValue('PAGOSEGURO_URL_PAYMENT', $urlApi);
                 $output .= $this->displayConfirmation($this->l('SettingsUpdated'));
             }
         }
         $this->context->smarty->assign([
-            'PAGOSEGURO_ACCOUNT_ID' => Configuration::get('PAGOSEGURO_ACCOUNT_ID'),
-            'PAGOSEGURO_API_KEY'    => Configuration::get('PAGOSEGURO_API_KEY'),
+            'PAGOSEGURO_ACCOUNT_ID'     => Configuration::get('PAGOSEGURO_ACCOUNT_ID'),
+            'PAGOSEGURO_API_KEY'        => Configuration::get('PAGOSEGURO_API_KEY'),
+            'PAGOSEGURO_TEST_MODE'      => Configuration::get('PAGOSEGURO_TEST_MODE'),
+            'PAGOSEGURO_URL_TEST'       => Configuration::get('PAGOSEGURO_URL_TEST'),
+            'PAGOSEGURO_URL_PAYMENT'    => Configuration::get('PAGOSEGURO_URL_PAYMENT'),
         ]);
 
         return $output.$this->display(__FILE__, 'views/templates/admin/configure.tpl');
