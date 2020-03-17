@@ -5,7 +5,7 @@ en: (Argentina, Brasil, Chile, Colombia, México, Panamá, Perú)
 
 ## Notas
 
-Se toma la base de ejemplo `https://github.com/PrestaShop/paymentexample` dada en la documentación de [Prestashop](http://doc.prestashop.com/display/PS17/Creating+a+PrestaShop+1.7+Payment+Module) y se adapta las funcionalidades [Webcheckout] http://developers.payulatam.com/es/web_checkout/integration.html) de Pago Seguro.
+Se toma la base de ejemplo `https://github.com/PrestaShop/paymentexample` dada en la documentación de [Prestashop](http://doc.prestashop.com/display/PS17/Creating+a+PrestaShop+1.7+Payment+Module) y se adapta las funcionalidades [Webcheckout](http://3.15.12.108:8000/pagoseguro/) de Pago Seguro.
 
 ## Traducciones
 
