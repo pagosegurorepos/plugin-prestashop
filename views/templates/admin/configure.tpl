@@ -35,12 +35,7 @@
                     <label for="PAGOSEGURO_TEST_MODE_off">No</label>
                 {/if}
                 <a class="slide-button btn"></a>
-                </span>
-                                                                                
-                <p class="help-block">
-                    Debe estar desactivado si en la configuración de PayU esta en modo prueba
-                </p>
-                                                    
+                </span>                                                    
                 </div>
             </div>
             <div class="form-group">
