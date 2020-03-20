@@ -3,6 +3,8 @@
 Módulo para pagos en línea por medio de Pago Seguro en modo Webcheckout(se redirige a la pasarela de pagos de Pago Seguro y una vez se procesa el pedido se retorna una respuesta al Prestashop), este módulo fue desarrollado para Colombia, pero debería funcionar
 en: (Argentina, Brasil, Chile, Colombia, México, Panamá, Perú)
 
+[Manual de Instalación](https://pagosegurorepos.github.io/documentation/#/plugins/prestashop)
+
 ## Notas
 
 Se toma la base de ejemplo `https://github.com/PrestaShop/paymentexample` dada en la documentación de [Prestashop](http://doc.prestashop.com/display/PS17/Creating+a+PrestaShop+1.7+Payment+Module) y se adapta las funcionalidades [Webcheckout](http://3.15.12.108:8000/pagoseguro/) de Pago Seguro.
