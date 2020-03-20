@@ -57,10 +57,14 @@ class PagoSeguroPaymentModuleFrontController extends ModuleFrontController
         $customerEmail              = $customer->email;
 
         // Active email data
-        $mailVars       = [
-            '{ps_payu_owner}'   => Configuration::get('PS_PAYU_OWNER'),
-            '{ps_payu_details}' => nl2br(Configuration::get('PS_PAYU_DETAILS')),
-            '{ps_payu_address}' => nl2br(Configuration::get('PS_PAYU_ADDRESS')),
+
+        $url = 1 == Configuration::get('PAGOSEGURO_TEST_MODE') ? Configuration::get('PAGOSEGURO_URL_TEST') : Configuration::get('PAGOSEGURO_URL_PAYMENT');
+        if (false == $url) {
+            $this->errors[] = $this->module->l('moduleWithoutConfig', 'payment');
+            $this->redirectWithNotifications($this->context->link->getPageLink('order'));
+        }
+
+        $mailVars = [
         ];
 
         // Validate Order
@@ -76,7 +80,7 @@ class PagoSeguroPaymentModuleFrontController extends ModuleFrontController
             $customer->secure_key);
 
         // Parameters Pago Seguro
-        $url                    = 1 == Configuration::get('PAGOSEGURO_TEST_MODE') ? Configuration::get('PAGOSEGURO_URL_TEST') : Configuration::get('PAGOSEGURO_URL_PAYMENT');
+
         $accountId              = Configuration::get('PAGOSEGURO_ACCOUNT_ID');
         $apiKey                 = Configuration::get('PAGOSEGURO_API_KEY');
 

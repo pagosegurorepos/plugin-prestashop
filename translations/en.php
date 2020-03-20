@@ -17,3 +17,4 @@ $_MODULE['<{pagoseguro}prestashop>configure_5d11b47fca71a83ba659a55d6ad68463']  
 $_MODULE['<{pagoseguro}prestashop>hook_payment_detail_54c4646cf19cbc216839edfcfd58982c'] = 'Once you confirm your order, you can pay using the payment method of your choice from Pago Seguro.';
 $_MODULE['<{pagoseguro}prestashop>payment_8b394b039e518edfd9d13aca669337ad']             = 'This payment method is not available.';
 $_MODULE['<{pagoseguro}prestashop>pagoseguro_b9b73639b9b838359eb9f0ddb1c60e91']          = 'Are you sure you want to uninstall the module PAGO SEGURO?';
+$_MODULE['<{pagoseguro}prestashop>payment_7e5ed12bc63c2feca5a616dd90510ded']             = 'You must configure Pago Seguro, more info https://pagosegurorepos.github.io/documentation/#/';

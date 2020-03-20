@@ -9,6 +9,7 @@ $_MODULE['<{pagoseguro}prestashop>pagoseguro_b4059c4fdd88ba4638edc54446837896'] 
 $_MODULE['<{pagoseguro}prestashop>pagoseguro_f7fe22899fbe6d7de3558564aebbd11b']          = 'No es posible guardar la configuración';
 $_MODULE['<{pagoseguro}prestashop>pagoseguro_4b8318f931601fd9c25cecd4c68e5d40']          = 'Configuración Actualizada';
 $_MODULE['<{pagoseguro}prestashop>payment_8b394b039e518edfd9d13aca669337ad']             = 'El metodo de pago no esta disponible';
+$_MODULE['<{pagoseguro}prestashop>payment_7e5ed12bc63c2feca5a616dd90510ded']             = 'Debes Configurar Pago Seguro, mas información https://pagosegurorepos.github.io/documentation/#/';
 $_MODULE['<{pagoseguro}prestashop>configure_254f642527b45bc260048e30704edb39']           = 'Configuración';
 $_MODULE['<{pagoseguro}prestashop>configure_c6da12ebfc91e973b0ca0e483b1c0527']           = 'Account ID';
 $_MODULE['<{pagoseguro}prestashop>configure_b7c1026a3a781a5008ed454f8fcf6eb4']           = 'Api Key';

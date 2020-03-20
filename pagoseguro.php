@@ -25,7 +25,7 @@ class PagoSeguro extends PaymentModule
         $this->currencies      = true;
         $this->currencies_mode = 'checkbox';
 
-        $this->bootstrap = true;
+        $this->bootstrap       = true;
 
         parent::__construct();
 

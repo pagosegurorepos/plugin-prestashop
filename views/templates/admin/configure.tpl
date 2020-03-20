@@ -9,7 +9,7 @@
             <div class="form-group">
                 <label class="control-label col-sm-3" for="PAGOSEGURO_ACCOUNT_ID">{l s='PAGOSEGURO_ACCOUNT_ID' mod='pagoseguro'}</label>
                  <div class="col-sm-9">
-                    <input type="text" class="form-control" name="PAGOSEGURO_ACCOUNT_ID" id="PAGOSEGURO_ACCOUNT_ID" value="{$PAGOSEGURO_ACCOUNT_ID}" required>
+                    <input type="number" class="form-control" name="PAGOSEGURO_ACCOUNT_ID" id="PAGOSEGURO_ACCOUNT_ID" value="{$PAGOSEGURO_ACCOUNT_ID}" required>
                 </div>
             </div> 
             <div class="form-group">
@@ -35,7 +35,12 @@
                     <label for="PAGOSEGURO_TEST_MODE_off">No</label>
                 {/if}
                 <a class="slide-button btn"></a>
-                </span>                                                    
+                </span>
+                                                                                
+                <p class="help-block">
+                    Debe estar desactivado si en la configuración de PayU esta en modo prueba
+                </p>
+                                                    
                 </div>
             </div>
             <div class="form-group">
