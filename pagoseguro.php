@@ -133,8 +133,8 @@ class PagoSeguro extends PaymentModule
     public function hookdisplayHeader($params)
     {
         if ('order' === $this->context->controller->php_self) {
-            $this->context->controller->registerStylesheet('modules-pagoseguro', 'modules/'.$this->name.'/css/payu.css', ['media' => 'all', 'priority' => 200]);
-            $this->context->controller->registerJavascript('modules-pagoseguro', 'modules/'.$this->name.'/js/payu.js', ['position' => 'bottom', 'priority' => 200]);
+            $this->context->controller->registerStylesheet('modules-pagoseguro', 'modules/'.$this->name.'/css/pagoseguro.css', ['media' => 'all', 'priority' => 200]);
+            $this->context->controller->registerJavascript('modules-pagoseguro', 'modules/'.$this->name.'/js/pagoseguro.js', ['position' => 'bottom', 'priority' => 200]);
         }
     }
 

@@ -38,7 +38,7 @@
                 </span>
                                                                                 
                 <p class="help-block">
-                    Debe estar desactivado si en la configuración de PayU esta en modo prueba
+                    Debe estar desactivado si en la configuración de Pago Seguro esta en modo producción
                 </p>
                                                     
                 </div>
