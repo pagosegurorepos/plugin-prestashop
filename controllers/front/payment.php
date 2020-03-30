@@ -91,16 +91,17 @@ class PagoSeguroPaymentModuleFrontController extends ModuleFrontController
 
         $stringSignature            = $accountId.'|'.$orderReference.'|'.$total.'|'.$product.'|'.$customerFullName.'|'.$customerEmail.'|'.'/payment/process||||||||||'.$apiKey;
         $signature                  = hash('sha512', $stringSignature);
-
+        $urlResponse                = $this->context->link->getPageLink('guest-tracking.php', true).'?id_order='.$order->id;
         $this->context->smarty->assign([
-            'URL'            => $url,
-            'KEY'            => $accountId,
-            'ORDER_ID'       => $orderReference,
-            'AMOUNT'         => $total,
-            'PRODUCT'        => $product,
-            'CUSTOMER'       => $customerFullName,
-            'CUSTOMER_EMAIL' => $customerEmail,
-            'SIGNATURE'      => $signature,
+            'URL'              => $url,
+            'KEY'              => $accountId,
+            'ORDER_ID'         => $orderReference,
+            'AMOUNT'           => $total,
+            'PRODUCT'          => $product,
+            'CUSTOMER'         => $customerFullName,
+            'CUSTOMER_EMAIL'   => $customerEmail,
+            'SIGNATURE'        => $signature,
+            'URLRESPONSE'      => $urlResponse,
         ]);
         $this->setTemplate('module:pagoseguro/views/templates/front/payment.tpl');
     }

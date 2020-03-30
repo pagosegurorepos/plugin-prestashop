@@ -10,6 +10,7 @@
             <input type="hidden"        name="firstname"   value="{$CUSTOMER}" />
             <input type="hidden"        name="email"       value="{$CUSTOMER_EMAIL}" />
             <input type="hidden"        name="hash"        value="{$SIGNATURE}" />
+            <input type="hidden"        name="url_response" value="{$URLRESPONSE}"/>
             <input type="hidden"        name="udf1"        value="/payment/process" />
             <input type="submit"        name="Submit"       type="hidden" value="Enviar" >
 	    </form>
