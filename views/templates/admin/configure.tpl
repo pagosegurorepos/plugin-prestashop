@@ -44,6 +44,18 @@
                 </div>
             </div>
             <div class="form-group">
+                <label class="control-label col-sm-3" for="PAGOSEGURO_ACCOUNT_ID_TEST">{l s='PAGOSEGURO_ACCOUNT_ID_TEST' mod='pagoseguro'}</label>
+                <div class="col-sm-9">
+                    <input type="number" class="form-control" name="PAGOSEGURO_ACCOUNT_ID_TEST" id="PAGOSEGURO_ACCOUNT_ID_TEST" value="{$PAGOSEGURO_ACCOUNT_ID_TEST}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-3" for="PAGOSEGURO_API_KEY_TEST">{l s='PAGOSEGURO_API_KEY_TEST' mod='pagoseguro'}</label>
+                <div class="col-sm-9">
+                    <input type="password" class="form-control" name="PAGOSEGURO_API_KEY_TEST" id="PAGOSEGURO_API_KEY_TEST" value="{$PAGOSEGURO_API_KEY_TEST}">
+                </div>
+            </div>
+            <div class="form-group">
                 <label class="control-label col-sm-3" for="PAGOSEGURO_URL_TEST">{l s='PAGOSEGURO_URL_TEST' mod='pagoseguro'}</label>
                 <div class="col-sm-9">
                     <input type="text" class="form-control" name="PAGOSEGURO_URL_TEST" id="PAGOSEGURO_URL_TEST" value="{$PAGOSEGURO_URL_TEST}">

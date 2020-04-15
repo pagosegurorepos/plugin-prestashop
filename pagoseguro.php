@@ -63,6 +63,8 @@ class PagoSeguro extends PaymentModule
             !Configuration::deleteByName('PAGOSEGURO_ACCOUNT_ID') ||
             !Configuration::deleteByName('PAGOSEGURO_API_KEY') ||
             !Configuration::deleteByName('PAGOSEGURO_TEST_MODE') ||
+            !Configuration::deleteByName('PAGOSEGURO_ACCOUNT_ID_TEST') ||
+            !Configuration::deleteByName('PAGOSEGURO_API_KEY_TEST') ||
             !Configuration::deleteByName('PAGOSEGURO_URL_TEST') ||
             !Configuration::deleteByName('PAGOSEGURO_URL_PAYMENT')
         ) {
@@ -180,13 +182,15 @@ class PagoSeguro extends PaymentModule
         $output = null;
 
         if (Tools::isSubmit('submit'.$this->name)) {
-            $accountId     = Tools::getValue('PAGOSEGURO_ACCOUNT_ID');
-            $apiKey        = Tools::getValue('PAGOSEGURO_API_KEY');
-            $testMode      = 1 == Tools::getValue('PAGOSEGURO_TEST_MODE') ? true : false;
-            $urlApiTest    = Tools::getValue('PAGOSEGURO_URL_TEST');
-            $urlApi        = Tools::getValue('PAGOSEGURO_URL_PAYMENT');
+            $accountId         = Tools::getValue('PAGOSEGURO_ACCOUNT_ID');
+            $apiKey            = Tools::getValue('PAGOSEGURO_API_KEY');
+            $testMode          = 1 == Tools::getValue('PAGOSEGURO_TEST_MODE') ? true : false;
+            $accountIdTest     = Tools::getValue('PAGOSEGURO_ACCOUNT_ID_TEST');
+            $apiKeyTest        = Tools::getValue('PAGOSEGURO_API_KEY_TEST');
+            $urlApiTest        = Tools::getValue('PAGOSEGURO_URL_TEST');
+            $urlApi            = Tools::getValue('PAGOSEGURO_URL_PAYMENT');
 
-            if ('' == $accountId || '' == $apiKey || '' == $urlApi || '' == $urlApiTest) {
+            if ('' == $accountId || '' == $apiKey || '' == $urlApi || '' == $urlApiTest || '' == $accountIdTest || '' == $apiKeyTest) {
                 $errors[] = $this->l('NotSaveConfiguration');
                 foreach ($errors as $error) {
                     $output .= $this->displayError($error);
@@ -195,17 +199,21 @@ class PagoSeguro extends PaymentModule
                 Configuration::updateValue('PAGOSEGURO_ACCOUNT_ID', $accountId);
                 Configuration::updateValue('PAGOSEGURO_API_KEY', $apiKey);
                 Configuration::updateValue('PAGOSEGURO_TEST_MODE', $testMode);
+                Configuration::updateValue('PAGOSEGURO_ACCOUNT_ID_TEST', $accountIdTest);
+                Configuration::updateValue('PAGOSEGURO_API_KEY_TEST', $apiKeyTest);
                 Configuration::updateValue('PAGOSEGURO_URL_TEST', $urlApiTest);
                 Configuration::updateValue('PAGOSEGURO_URL_PAYMENT', $urlApi);
                 $output .= $this->displayConfirmation($this->l('SettingsUpdated'));
             }
         }
         $this->context->smarty->assign([
-            'PAGOSEGURO_ACCOUNT_ID'     => Configuration::get('PAGOSEGURO_ACCOUNT_ID'),
-            'PAGOSEGURO_API_KEY'        => Configuration::get('PAGOSEGURO_API_KEY'),
-            'PAGOSEGURO_TEST_MODE'      => Configuration::get('PAGOSEGURO_TEST_MODE'),
-            'PAGOSEGURO_URL_TEST'       => Configuration::get('PAGOSEGURO_URL_TEST'),
-            'PAGOSEGURO_URL_PAYMENT'    => Configuration::get('PAGOSEGURO_URL_PAYMENT'),
+            'PAGOSEGURO_ACCOUNT_ID'           => Configuration::get('PAGOSEGURO_ACCOUNT_ID'),
+            'PAGOSEGURO_API_KEY'              => Configuration::get('PAGOSEGURO_API_KEY'),
+            'PAGOSEGURO_TEST_MODE'            => Configuration::get('PAGOSEGURO_TEST_MODE'),
+            'PAGOSEGURO_ACCOUNT_ID_TEST'      => Configuration::get('PAGOSEGURO_ACCOUNT_ID_TEST'),
+            'PAGOSEGURO_API_KEY_TEST'         => Configuration::get('PAGOSEGURO_API_KEY_TEST'),
+            'PAGOSEGURO_URL_TEST'             => Configuration::get('PAGOSEGURO_URL_TEST'),
+            'PAGOSEGURO_URL_PAYMENT'          => Configuration::get('PAGOSEGURO_URL_PAYMENT'),
         ]);
 
         return $output.$this->display(__FILE__, 'views/templates/admin/configure.tpl');

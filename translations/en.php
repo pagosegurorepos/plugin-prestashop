@@ -18,3 +18,5 @@ $_MODULE['<{pagoseguro}prestashop>hook_payment_detail_54c4646cf19cbc216839edfcfd
 $_MODULE['<{pagoseguro}prestashop>payment_8b394b039e518edfd9d13aca669337ad']             = 'This payment method is not available.';
 $_MODULE['<{pagoseguro}prestashop>pagoseguro_b9b73639b9b838359eb9f0ddb1c60e91']          = 'Are you sure you want to uninstall the module PAGO SEGURO?';
 $_MODULE['<{pagoseguro}prestashop>payment_7e5ed12bc63c2feca5a616dd90510ded']             = 'You must configure Pago Seguro, more info https://pagosegurorepos.github.io/documentation/#/';
+$_MODULE['<{pagoseguro}prestashop>configure_e5b327ae564893508bc733a85ad9448a']           = 'Account Id Test';
+$_MODULE['<{pagoseguro}prestashop>configure_39f11d2b692120c70f02e992fe0398e0']           = 'Api Key Test';

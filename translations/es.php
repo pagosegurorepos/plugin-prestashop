@@ -19,3 +19,5 @@ $_MODULE['<{pagoseguro}prestashop>configure_5d11b47fca71a83ba659a55d6ad68463']  
 $_MODULE['<{pagoseguro}prestashop>configure_c9cc8cce247e49bae79f15173ce97354']           = 'Guardar';
 $_MODULE['<{pagoseguro}prestashop>hook_payment_detail_b2f40690858b404ed10e62bdf422c704'] = 'Total';
 $_MODULE['<{pagoseguro}prestashop>hook_payment_detail_54c4646cf19cbc216839edfcfd58982c'] = 'Una vez que confirme su pedido, puede pagar utilizando el método de pago que elija de Pago Seguro.';
+$_MODULE['<{pagoseguro}prestashop>configure_e5b327ae564893508bc733a85ad9448a']           = 'Account Id Test';
+$_MODULE['<{pagoseguro}prestashop>configure_39f11d2b692120c70f02e992fe0398e0']           = 'Api Key Test';

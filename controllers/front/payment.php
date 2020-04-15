@@ -81,8 +81,8 @@ class PagoSeguroPaymentModuleFrontController extends ModuleFrontController
 
         // Parameters Pago Seguro
 
-        $accountId              = Configuration::get('PAGOSEGURO_ACCOUNT_ID');
-        $apiKey                 = Configuration::get('PAGOSEGURO_API_KEY');
+        $accountId= 1 == Configuration::get('PAGOSEGURO_TEST_MODE') ? Configuration::get('PAGOSEGURO_ACCOUNT_ID_TEST') : Configuration::get('PAGOSEGURO_ACCOUNT_ID');
+        $apiKey   = 1 == Configuration::get('PAGOSEGURO_TEST_MODE') ? Configuration::get('PAGOSEGURO_API_KEY_TEST') : Configuration::get('PAGOSEGURO_API_KEY');
 
         // Order
         $order                       = new Order($this->module->currentOrder); // $this->module->currentOrder is generate after validateOrder
