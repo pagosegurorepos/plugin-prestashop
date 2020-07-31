@@ -169,7 +169,8 @@ class PagoSeguro extends PaymentModule
                     ->setCallToActionText($this->l(''))
                     ->setAction($this->context->link->getModuleLink($this->name, 'payment', [], true))
                     ->setAdditionalInformation($this->context->smarty->fetch('module:pagoseguro/views/templates/hook/hook_payment_detail.tpl'))
-                    ->setLogo(Media::getMediaPath(_PS_MODULE_DIR_.$this->name.'/img/payment_logo.png'));
+                    ->setLogo('https://documentosps.s3.us-east-2.amazonaws.com/logo_green.png');
+        //->setLogo(Media::getMediaPath(_PS_MODULE_DIR_.$this->name.'/img/payment_logo.png'));
 
         return $externalOption;
     }

@@ -1,8 +1,8 @@
 <form id="configuration_form" class="defaultForm form-horizontal pagoseguro" action="index.php?controller=AdminModules&amp;configure=pagoseguro&amp;token=6208caa83a7464fc77be99b0cb27a738" method="post" enctype="multipart/form-data" novalidate="">
     <input type="hidden" name="submitpagoseguro" value="1">
     <div class="panel">
-        <div class="panel-heading" style="color: #041E3D; height: 60px;">
-            <img style="max-width:50px; display: inline-block;" src="/prestashop/modules/pagoseguro/logo.png">
+        <div class="panel-heading" style="color: #FFF; height: 60px; background-color: grey;">
+            <img style="max-width:75px; display: inline-block;" src="https://documentosps.s3.us-east-2.amazonaws.com/logo_green.png">
             <h3 style="display: contents;">{l s='Configuration' mod='pagoseguro'} PAGO SEGURO</h3>
         </div>
         <div class="panel-body">
